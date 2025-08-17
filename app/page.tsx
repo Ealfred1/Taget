@@ -16,10 +16,18 @@ export default function Home() {
         <Hero />
       </div>
       <Partners />
-      <WhoWeAre />
+
+      <div id="about" className="h-full flex flex-row w-full">
+        <WhoWeAre />
+      </div>
+
       <WhyJoin />
       <Events />
-      <ContactForm />
+
+      <span id="contact">
+        <ContactForm />
+      </span>
+      
       <JoinCommunity />
       <Footer />
     </main>

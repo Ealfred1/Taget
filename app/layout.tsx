@@ -6,7 +6,7 @@ import "./globals.css"
 const geist = Geist({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Taget - Set Your Targets",
+  title: "Taget - Set Goals, Learn, Grow",
   description:
     "Empowering communities, igniting innovation, and building a decentralized future—one milestone at a time.",
 }

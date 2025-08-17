@@ -1,57 +1,44 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
 
 export default function Partners() {
-  // Double the partners array for seamless loop
   const partners = [
-    {
-      name: "VIVE",
-      logo: "/Vive.svg",
-    },
-    {
-      name: "Oculus",
-      logo: "/Oculus.svg",
-    },
-    {
-      name: "Mprofy",
-      logo: "/Mprofy.svg",
-    },
-    {
-      name: "Unity",
-      logo: "/Unity.svg",
-    },
+    { name: "VIVE", logo: "/Vive.svg" },
+    { name: "Oculus", logo: "/Oculus.svg" },
+    { name: "Mprofy", logo: "/Mprofy.svg" },
+    { name: "Unity", logo: "/Unity.svg" },
   ]
 
-  const doubledPartners = [...partners, ...partners]
+  // Create two identical sets for seamless looping
+  const duplicatedPartners = [...partners, ...partners]
 
   return (
     <section className="py-8 sm:py-12 border-b overflow-hidden">
       <div className="relative">
-        <div 
-          className="flex whitespace-nowrap animate-marquee"
+        <div
+          className="flex animate-marquee"
           style={{
-            animationDuration: '20s',
-            animationTimingFunction: 'linear',
-            animationIterationCount: 'infinite'
+            width: `${partners.length * 400}px`, // Total width for both sets
           }}
         >
-          {doubledPartners.map((partner, index) => (
-            <motion.div
+          {duplicatedPartners.map((partner, index) => (
+            <div
               key={`${partner.name}-${index}`}
-              className="mx-4 sm:mx-8 inline-block"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2 }}
+              className="flex-shrink-0 px-8 sm:px-12 flex items-center justify-center hover:scale-105 transition-transform duration-200"
+              style={{ width: "400px" }}
             >
-              <Image
-                src={partner.logo || "/placeholder.svg"}
-                alt={partner.name}
-                width={120}
-                height={50}
-                className="h-8 scale-[2] w-auto sm:h-10 md:h-11 lg:h-12 object-contain" // Modified this line
-              />
-            </motion.div>
+              <div className="relative w-full h-16">
+                <Image
+                  src={partner.logo || "/placeholder.svg"}
+                  alt={partner.name}
+                  fill
+                  className="object-contain object-center"
+                  sizes="400px"
+                  priority={index < partners.length}
+                />
+              </div>
+            </div>
           ))}
         </div>
       </div>

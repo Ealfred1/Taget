@@ -1,10 +1,23 @@
 "use client"
 
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useMotionValue, useTransform, animate } from "framer-motion"
 import Image from "next/image"
+import { useEffect } from "react"
 
 export default function Hero() {
+  const count = useMotionValue(0)
+  const roundedCount = useTransform(count, latest => Math.round(latest))
+
+  useEffect(() => {
+    const controls = animate(count, 200, {
+      duration: 2,
+      ease: "easeOut"
+    })
+
+    return () => controls.stop()
+  }, [count])
+
   return (
     <section className="py-12 md:py-20">
       <div className="container-custom">
@@ -28,7 +41,9 @@ export default function Hero() {
               </div>
               <div className="flex space-x-6">
                 <div>
-                  <p className="text-xl font-bold">200+</p>
+                  <motion.p className="text-xl font-bold">
+                    <motion.span>{roundedCount}</motion.span>+
+                  </motion.p>
                   <p className="text-xs">Community</p>
                 </div>
                 <div>
@@ -66,37 +81,9 @@ export default function Hero() {
           >
               <div className="relative w-full h-full">
             <div className="aspect-square max-w-md mx-auto">
-              {/*   <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                >
-                  <div className="w-3/4 h-3/4 rounded-full border-8 border-black"></div>
-                </motion.div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-1/2 h-1/2 rounded-full border-8 border-black"></div>
-                </div>
-                <motion.div
-                  className="absolute inset-0 flex items-center justify-center"
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-                >
-                  <div className="w-1/4 h-1/4 rounded-full bg-orange-400"></div>
-                </motion.div>
-
-                {/* Target crosshairs 
-                <div className="absolute top-0 bottom-0 left-1/2 -ml-px w-px bg-black"></div>
-                <div className="absolute left-0 right-0 top-1/2 -mt-px h-px bg-black"></div>
-
-                {/* Corner brackets 
-                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-black"></div>
-                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-black"></div>
-                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-black"></div>
-                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-black"></div> */}
-            <Image src="/hero.svg" alt="Hero Image" width={525} height={525} />
+              <Image src="/hero.svg" alt="Hero Image" width={525} height={525} />
                 </div> 
               </div> 
-
           </motion.div>
         </div>
       </div>

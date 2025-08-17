@@ -23,6 +23,10 @@ body {
   }
 
   .container-custom {
+    @apply max-w-screen-2xl mx-auto sm:px-4 md:px-6 lg:px-8;
+  }
+
+  .container-event {
     @apply max-w-7xl mx-auto sm:px-4 md:px-6 lg:px-8;
   }
 
